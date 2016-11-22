@@ -1,0 +1,13 @@
+{
+  "name": "nodejs-chat",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Misha Kharkov <Mikhail.Kharkov@dataart.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "angular-prompt": "^1.2.0"
+  }
+}

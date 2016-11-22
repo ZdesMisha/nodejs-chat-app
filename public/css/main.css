@@ -1,0 +1,44 @@
+body {
+  background-color: #eee;
+}
+
+.block-panel {
+  max-width: 330px;
+  padding: 15px;
+}
+.block-panel .block-panel-heading,
+.block-panel .checkbox,
+.block-panel .message-input
+ {
+  margin-bottom: 10px;
+}
+.block-panel .checkbox {
+  font-weight: normal;
+}
+.block-panel .credentials {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.block-panel .credentials:focus {
+  z-index: 2;
+}
+.block-panel input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.block-panel input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.chat-body .message{
+  display: block;
+  font-size: 1.2em;
+}

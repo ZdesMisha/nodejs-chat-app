@@ -1,0 +1,50 @@
+<div class="block-panel">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="createRoom()">Create room</button>
+            </span>
+                <input type="text" class="form-control" ng-model="newRoom">
+            </div>
+        </div>
+    </div>
+    <h2>{{name}}</h2>
+    <h1>Rooms</h1>
+    <div class="list-group">
+        <a href="#" class="list-group-item" ng-repeat="room in rooms" ng-click="changeRoom(room)">{{room}}</a>
+    </div>
+</div>
+
+
+<div class="block-panel">
+    <h2 class="block-panel-heading">
+        <srtong>{{currentRoom}}</srtong>
+    </h2>
+    <div class="row message-input">
+        <div class="col-lg-12">
+            <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="sendMessage()">Send</button>
+                </span>
+                <input type="text" class="form-control" ng-model="newMessage">
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body chat-body">
+
+            <span class="message" ng-repeat="message in messages"><span class="user" style="color: #0A6">{{message.user}}</span>:{{message.message}}</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="block-panel">
+    <h2 class="block-panel-heading">Users</h2>
+    <div class="panel panel-default">
+        <div class="panel-body chat-body">
+            <span class="message" ng-repeat="user in users">{{user}}</span>
+        </div>
+    </div>
+</div>
