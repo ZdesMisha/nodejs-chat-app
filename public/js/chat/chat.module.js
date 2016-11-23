@@ -3,7 +3,7 @@ angular.module('chat', ['btford.socket-io', 'cgPrompt'])
 
 
     .controller('ChatController',
-        ['$scope', '$timeout', 'prompt', 'socketService', function ($scope, $timeout, prompt, socketService) {
+        ['$scope', '$timeout', '$http', 'prompt', 'socketService', function ($scope, $timeout, $http, prompt, socketService) {
             $scope.name = "";
             $scope.rooms = [];
             $scope.messages = [];
@@ -35,6 +35,10 @@ angular.module('chat', ['btford.socket-io', 'cgPrompt'])
                 });
             };
 
+            $scope.logout = function () {
+                $http.get('/logout');
+            };
+
 
             $scope.createRoom = function () {
                 console.log('create new room');
@@ -56,10 +60,10 @@ angular.module('chat', ['btford.socket-io', 'cgPrompt'])
                     $scope.users = data.users;
                     $scope.currentRoom = data.currentRoom
                 });
-                
-                
-                $scope.socket.on('disconnect',function () {
-                   console.log($scope.name+" disconnected"); 
+
+
+                $scope.socket.on('disconnect', function () {
+                    console.log($scope.name + " disconnected");
                 });
 
 
