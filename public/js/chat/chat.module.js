@@ -13,18 +13,10 @@ angular.module('chat', ['btford.socket-io', 'cgPrompt'])
             $scope.users = [];
             $scope.socket = "";
 
-
-            prompt({
-                title: 'Enter your name',
-                input: true,
-                label: 'Name',
-                values: ['other', 'possible', 'names']
-            }).then(function (name) {
-                console.log(name);
-                $scope.socket = socketService.setupConnection(name);
-                $scope.name = name;
-                setupListeners();
-            });
+            //todo something with it
+            $scope.socket = socketService.setupConnection("Misha");
+            $scope.name = "Misha";
+            setupListeners();
 
             $scope.sendMessage = function () {
                 console.log('create new message');

@@ -1,52 +1,91 @@
-<div class="block-panel">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="input-group">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button" ng-click="createRoom()">Create room</button>
-            </span>
-                <input type="text" class="form-control" ng-model="newRoom">
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">NodeJs Chat</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse login-label">
+            <ul class="nav navbar-nav">
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-md-3 sidebar-offcanvas" id="sidebar1">
+            <div class="block-panel">
+                <h3 class="block-panel-heading">Users</h3>
+                <div class="panel panel-default">
+                    <div class="panel-body chat-body">
+                        <span class="message" ng-repeat="user in users">{{user}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="chat-container">
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Room: {{currentRoom}}<i class="block-panel-heading login-label">
+                            Logged as
+                            <srtong>{{name}}</srtong>
+                        </i></div>
+                        <div class="panel-body">
+                            <div>
+                                <div class="row message-bubble" ng-repeat="message in messages">
+                                    <p class="text-muted">{{message.user}}</p>
+                                    <span>{{message.message}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="newMessage">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-primary  " type="button"
+                                            ng-click="sendMessage()">Send</button>
+                                  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 sidebar-offcanvas" id="sidebar">
+            <div class="block-panel">
+                <h3>Rooms</h3>
+                <div class="list-group">
+                    <a href="#" class="list-group-item" ng-repeat="room in rooms"
+                       ng-click="changeRoom(room)">{{room}}</a>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button" ng-click="createRoom()">Create room</button>
+                    </span>
+                    <input type="text" class="form-control" ng-model="newRoom">
+                </div>
             </div>
         </div>
     </div>
-    <h2>{{name}}</h2>
-    <h1>Rooms</h1>
-    <div class="list-group">
-        <a href="#" class="list-group-item" ng-repeat="room in rooms" ng-click="changeRoom(room)">{{room}}</a>
-    </div>
+
+    <hr>
+
+    <footer>
+        <p>&copy; 2016 Company, Inc.</p>
+    </footer>
+
 </div>
-
-
-<div class="block-panel">
-    <h2 class="block-panel-heading">
-        <srtong>{{currentRoom}}</srtong>
-    </h2>
-    <div class="row message-input">
-        <div class="col-lg-12">
-            <div class="input-group">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-click="sendMessage()">Send</button>
-                </span>
-                <input type="text" class="form-control" ng-model="newMessage">
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-body chat-body">
-
-            <span class="message" ng-repeat="message in messages"><span class="user" style="color: #0A6">{{message.user}}</span>:{{message.message}}</span>
-        </div>
-    </div>
-</div>
-
-
-<div class="block-panel">
-    <h2 class="block-panel-heading">Users</h2>
-    <div class="panel panel-default">
-        <div class="panel-body chat-body">
-            <span class="message" ng-repeat="user in users">{{user}}</span>
-        </div>
-    </div>
-</div>
-
-<a href="/logout">Logout</a>

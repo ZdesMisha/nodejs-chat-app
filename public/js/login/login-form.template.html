@@ -1,7 +1,18 @@
-<form class="block-panel">
-    <h2 class="block-panel-heading">Sign in</h2>
-    <input type="text" class="form-control credentials" placeholder="Email address" autofocus="" ng-model="username">
-    <input type="password" class="form-control credentials" placeholder="Password" ng-model="password">
-    <button class="btn btn-lg btn-primary btn-block" ng-click="login()">Login</button>
-    <a href="/registration">Registration</a>
-</form>
+
+<div class="container">
+
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="loginInputEmail" class="sr-only">Email address</label>
+        <input type="text" id="loginInputEmail" class="form-control" placeholder="Email address" required autofocus ng-model="username">
+        <label for="loginInputPassword" class="sr-only">Password</label>
+        <input type="password" id="loginInputPassword" class="form-control" placeholder="Password" required ng-model="password">
+        <div class="checkbox">
+            <label>
+                <a href="/registration">Registration</a>
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" ng-click="login()">Sign in</button>
+    </form>
+
+</div>

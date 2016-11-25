@@ -2,10 +2,11 @@ var express = require('express');
 var ejs = require('ejs');
 var http = require('http');
 var fs = require('fs');
-var Room = require("./room");
+var Room = require("./server/room");
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('client-sessions');
+var socket = require('./server/socket');
 
 
 var app = express();
@@ -23,32 +24,21 @@ app.use(session({
     cookieName: 'session',
     secret: 'random_string_goes_here',
     duration: 30 * 60 * 1000,
-    activeDuration: 5 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000
 }));
 
 var db = mongoose.connect('mongodb://localhost/chat-users');
-var User = require('./mongodb/models/users.js');
-
-// fs.readdirSync(__dirname + "/mongodb/models").forEach(function (filename) {
-//     if (~filename.indexOf('.js')) {
-//         require(__dirname + '/mongodb/models/' + filename);
-//     }
-// });
+var User = require('./server/mongodb/models/user.js');
+var RoomModel = require('./server/mongodb/models/room.js');
 
 app.get('/', function (req, res) {
-    if (req.session && req.session.user) { // Check if session exists
-        // lookup the user in the DB by pulling their email from the session
+    if (req.session && req.session.user) { 
         User.findOne({username: req.session.user.username}, function (err, user) {
             if (!user) {
-                // if the user isn't found in the DB, reset the session info and
-                // redirect the user to the login page
                 req.session.reset();
                 res.redirect('/signin');
             } else {
-                // expose the user to the template
                 res.locals.user = user;
-
-                // render the dashboard page
                 res.render('mainpage.ejs');
             }
         });
@@ -64,6 +54,7 @@ app.get('/signin', function (req, res) {
 app.post('/login', function (req, res) {
     var username = "";
     var password = "";
+    console.log(req.body);
     if (req.body) {
         username = req.body.username;
         password = req.body.password;
@@ -73,7 +64,8 @@ app.post('/login', function (req, res) {
             console.log("error occurred wile searching for user");
         } else if (user) {
             req.session.user = user;
-            res.redirect("/");
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.end();
         } else {
             res.writeHead(401, {'Content-Type': 'application/json'});
             res.end();
@@ -193,3 +185,7 @@ io.on('connection', function (client) {
 });
 
 server.listen(3000);
+
+server.on('close',function(){
+   console.log("CLOSED")
+});

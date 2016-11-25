@@ -5,6 +5,7 @@ angular.module('registration', [])
     .controller('RegistrationController', ['$scope', '$http', function ($scope, $http) {
         $scope.username = "";
         $scope.password = "";
+        $scope.passwordConfirmation = "";
 
         $scope.register = function () {
             var data = JSON.stringify({

@@ -19,7 +19,10 @@ angular.module('login', [])
             };
 
             $http.post('/login', data, config)
-                
+                .success(function (data, status, headers, config) {
+                    console.log('loggin succeed')
+                    $http.get("/");
+                })
                 .error(function (data, status, header, config) {
                     console.log('login failed')
                 });
